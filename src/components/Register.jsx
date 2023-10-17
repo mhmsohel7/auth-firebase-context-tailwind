@@ -15,6 +15,7 @@ const Register = () => {
     const password = form.password.value;
     console.log(name, email, password);
 
+    //THis createUser function come from Authproviders.jsx this is a breakdown function. all auth will be in authproviders.jsx.
     createUser(email, password)
       .then((result) => {
         const loggedUser = result.user;
