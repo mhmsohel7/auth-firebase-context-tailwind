@@ -13,6 +13,9 @@ const auth = getAuth(app);
 const Authproviders = ({ children }) => {
   const [user, setUser] = useState(null);
 
+  //loading state
+  const [loading, setLoading] = useState(true);
+
   //user register breakdown using firebase
   const createUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -36,6 +39,10 @@ const Authproviders = ({ children }) => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       console.log("auth state change", currentUser);
       setUser(currentUser);
+
+      setLoading(false);
+      //loading totokkon hobe, jotokkon porjonto onAuthStateChanged er State change hobe na.
+      //state change hole, loading r hobe na. oijonno setLoading(false) korte hobe.
     });
     return () => {
       unSubscribe();
@@ -47,6 +54,7 @@ const Authproviders = ({ children }) => {
     createUser,
     logIn,
     logOut,
+    loading,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
