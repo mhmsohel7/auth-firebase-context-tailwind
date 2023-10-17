@@ -46,7 +46,6 @@ const Header = () => {
                 onClick={handleLogOut}
                 className="btn btn-ghost normal-case text-xl"
               >
-                {" "}
                 SignOut
               </button>
             </>

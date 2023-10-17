@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { AuthContext } from "./Provider/Authproviders";
 
 const Login = () => {
-  const { logIn } = useContext(AuthContext);
+  const { logIn, googleSignIn } = useContext(AuthContext);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -23,6 +23,17 @@ const Login = () => {
         console.log(error.message);
       });
   };
+  const handleGoogle = () => {
+    googleSignIn()
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
   return (
     <>
       <div className="hero min-h-screen bg-base-200">
@@ -63,6 +74,11 @@ const Login = () => {
               </div>
               <div className="form-control mt-6">
                 <button className="btn btn-primary">Login</button>
+              </div>
+              <div className="w-20 h-5 rounded-full ">
+                <button className="btn btn-primary" onClick={handleGoogle}>
+                  Google
+                </button>
               </div>
             </form>
           </div>
