@@ -1,4 +1,9 @@
+import { useContext } from "react";
+import { AuthContext } from "./Provider/Authproviders";
+
 const Login = () => {
+  const { logIn } = useContext(AuthContext);
+
   const handleLogin = (e) => {
     e.preventDefault();
 
@@ -6,6 +11,17 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
     console.log(email, password);
+
+    //THis logIn function come from Authproviders.jsx this is a breakdown function. all auth will be in authproviders.jsx.
+    logIn(email, password)
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+        form.reset();
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
   return (
     <>

@@ -1,13 +1,29 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "./Provider/Authproviders";
 
 const Register = () => {
+  //destudture from Authproviders
+  const { createUser } = useContext(AuthContext);
+
   const handleRegister = (e) => {
     e.preventDefault();
 
     const form = e.target;
+    const name = form.name.value;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
+    console.log(name, email, password);
+
+    createUser(email, password)
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+        form.reset(); //ekbar register howar por reset hoye jabe.
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
 
   return (
